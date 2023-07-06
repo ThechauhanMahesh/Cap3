@@ -23,11 +23,11 @@ logging.basicConfig(
 # start the bot
 logging.info("Starting...")
 try:
-    apiid = config("APP_ID", cast=int)
-    apihash = config("API_HASH")
-    bottoken = config("BOT_TOKEN")
-    frm = config("FROM_CHANNEL", cast=lambda x: [int(_) for _ in x.split(" ")])
-    tochnls = config("TO_CHANNEL", cast=lambda x: [int(_) for _ in x.split(" ")])
+    apiid = 2992000
+    apihash = "235b12e862d71234ea222082052822fd"
+    bottoken = "6320216767:AAGWg4iaa1b5nceptKcMO8gtv4PqdZh1fM0"
+    frm = [int(-1001638858603)]
+    tochnls = [int(-1001959515403)]
     datgbot = TelegramClient("bot", apiid, apihash).start(bot_token=bottoken)
 except:
     logging.error("Environment vars are missing! Kindly recheck.")
