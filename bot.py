@@ -37,14 +37,7 @@ except:
 
 @datgbot.on(events.NewMessage(pattern="/start"))
 async def _(event):
-    await event.reply(
-        f"Hi `{event.sender.first_name}`!\n\nI am a channel auto-post bot!! Read /help to know more!\n\nI can be used in only two channels (one user) at a time. Kindly deploy your own bot.\n\n[More bots](https://t.me/its_xditya)..",
-        buttons=[
-            Button.url("Repo", url="https://github.com/xditya/ChannelAutoForwarder"),
-            Button.url("Dev", url="https://t.me/its_xditya"),
-        ],
-        link_preview=False,
-    )
+    await event.reply("@DroneBots")
 
 
 @datgbot.on(events.NewMessage(pattern="/help"))
