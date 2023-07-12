@@ -28,6 +28,8 @@ try:
     bottoken = "6375526763:AAHaTbXpHjhK7FaIjOpQtsSSXH4Mus864Bk"
     frm = [int(-1001907850170)]
     tochnls = [int(-1001609789847)]
+    frm2 = [int(-1001718622135)]
+    tochnls2 = [int(-1001982096447)]
     datgbot = TelegramClient("bot", apiid, apihash).start(bot_token=bottoken)
 except:
     logging.error("Environment vars are missing! Kindly recheck.")
@@ -39,6 +41,38 @@ except:
 async def _(event):
     await event.reply("@DroneBots")
 
+
+@datgbot.on(events.NewMessage(incoming=True, chats=frm2))
+async def _(event):
+    for tochnl in tochnls2:
+        try:
+            if event.poll:
+                return
+            if event.photo:
+                photo = event.media.photo
+                await datgbot.send_file(
+                    tochnl, photo, caption=event.text, link_preview=False
+                )
+            elif event.media:
+                try:
+                    if event.media.webpage:
+                        await datgbot.send_message(
+                            tochnl, event.text, link_preview=False
+                        )
+                except Exception:
+                    media = event.media.document
+                    await datgbot.send_file(
+                        tochnl, media, caption=event.text, link_preview=False
+                    )
+                finally:
+                    return
+            else:
+                await datgbot.send_message(tochnl, event.text, link_preview=False)
+        except Exception as exc:
+            logging.error(
+                "TO_CHANNEL ID is wrong or I can't send messages there (make me admin).\nTraceback:\n%s",
+                exc,
+            )
 
 
 @datgbot.on(events.NewMessage(incoming=True, chats=frm))
