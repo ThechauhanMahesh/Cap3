@@ -33,14 +33,26 @@ except:
     logging.error("Environment vars are missing! Kindly recheck.")
     logging.info("Bot is quiting...")
     exit()
+    
+on = 1
 
-
+@datgbot.on(events.NewMessage(pattern="/switch"))
+async def _(event):
+    global on
+    on *= -1
+    mode = "on"
+    if on != 1:
+        mode = "off"
+    await event.reply(f'Turned {mode}')
+    
 @datgbot.on(events.NewMessage(pattern="/start"))
 async def _(event):
     await event.reply("@DroneBots")
 
 @datgbot.on(events.NewMessage(incoming=True, chats=frm))
 async def _(event):
+    if on != 1:
+        return
     for tochnl in tochnls:
         try:
             if event.poll:
